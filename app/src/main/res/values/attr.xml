@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ColorSeekBar">
+        <attr name="colorSeeds" format="reference" />
+        <attr name="cornerRadius" format="dimension" />
+        <attr name="barHeight" format="dimension" />
+        <attr name="thumbBorder" format="dimension" />
+        <attr name="thumbBorderColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="RB">
+        <attr name="starWidth" format="dimension" />
+        <attr name="starHeight" format="dimension" />
+        <attr name="maxStar" format="integer" />
+        <attr name="minStar" format="float" />
+        <attr name="currentStar" format="float" />
+        <attr name="padding" format="dimension" />
+        <attr name="emptyStar" format="reference" />
+        <attr name="fullStar" format="reference" />
+        <attr name="halfStar" format="reference" />
+        <attr name="canChange" format="boolean" />
+    </declare-styleable>
+
+</resources>

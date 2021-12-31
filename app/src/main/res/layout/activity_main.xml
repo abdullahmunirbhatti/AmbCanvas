@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
+    tools:context=".MainActivity">
+
+    <com.amb.ambcanvas.AmbCanvasView
+        android:id="@+id/canvas"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/seekbarWidth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvBrushSize"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="Brush Size"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/seekbarWidth"
+        app:layout_constraintEnd_toStartOf="@+id/seekbarWidth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/seekbarWidth" />
+
+    <SeekBar
+        android:id="@+id/seekbarWidth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/colorSeekBar"
+        android:maxHeight="8dp"
+        android:paddingVertical="10dp"
+        android:progress="10"
+        android:progressTint="@color/black"
+        android:thumbTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/seekbarOpacity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvBrushSize"
+        app:layout_constraintTop_toBottomOf="@+id/canvas"
+        app:layout_constraintWidth_percent="0.8" />
+
+
+    <TextView
+        android:id="@+id/tvBrushOpacity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="Opacity"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/seekbarOpacity"
+        app:layout_constraintEnd_toStartOf="@+id/seekbarOpacity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/seekbarOpacity" />
+
+    <SeekBar
+        android:id="@+id/seekbarOpacity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/colorSeekBar"
+        android:maxHeight="8dp"
+        android:paddingVertical="10dp"
+        android:progress="0"
+        android:progressTint="@color/black"
+        android:thumbTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/colorSeekBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvBrushOpacity"
+        app:layout_constraintTop_toBottomOf="@+id/seekbarWidth"
+        app:layout_constraintWidth_percent="0.8" />
+
+
+    <TextView
+        android:id="@+id/tvBrushColor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="Color"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/colorSeekBar"
+        app:layout_constraintEnd_toStartOf="@+id/colorSeekBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/colorSeekBar" />
+
+    <com.amb.canvas.ColorSeekBar
+        android:id="@+id/colorSeekBar"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:layout_marginBottom="10dp"
+        android:thumbOffset="0dp"
+        app:barHeight="10dp"
+        app:cornerRadius="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/cl2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvBrushColor"
+        app:layout_constraintTop_toBottomOf="@+id/seekbarOpacity"
+        app:layout_constraintWidth_percent="0.8"
+        app:thumbBorder="2dp"
+        app:thumbBorderColor="@color/white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/cl1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/colorSeekBar">
+
+        <Button
+            android:id="@+id/btnLine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Line"
+            android:textAllCaps="false"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnRectangle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnRectangle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Rectangle"
+            android:textAllCaps="false"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnCircle"
+            app:layout_constraintStart_toEndOf="@+id/btnLine"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnCircle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Circle"
+            android:textAllCaps="false"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnEllipse"
+            app:layout_constraintStart_toEndOf="@+id/btnRectangle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnEllipse"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Ellipse"
+            android:textAllCaps="false"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnPen"
+            app:layout_constraintStart_toEndOf="@+id/btnCircle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnPen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Pen"
+            android:textAllCaps="false"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnEllipse"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl2">
+
+        <Button
+            android:id="@+id/btnEraser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Eraser"
+            android:textAllCaps="false"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnDraw"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnDraw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Draw"
+            android:textAllCaps="false"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnClear"
+            app:layout_constraintStart_toEndOf="@+id/btnEraser"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Clear"
+            android:textAllCaps="false"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnUndo"
+            app:layout_constraintStart_toEndOf="@+id/btnDraw"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnUndo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Undo"
+            android:textAllCaps="false"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnRedo"
+            app:layout_constraintStart_toEndOf="@+id/btnClear"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnRedo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Redo"
+            android:textAllCaps="false"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnUndo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
