@@ -35,22 +35,22 @@ android {
 dependencies {
 }
 
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            release(MavenPublication) {
-//                from components.release
-//                groupId = 'com.github.Funsol-DevOps'
-//                artifactId = 'PandaCanvas'
-//                version = '1.0'
-//            }
-//            debug(MavenPublication) {
-//                from components.debug
-//                groupId = 'com.github.Funsol-DevOps'
-//                artifactId = 'PandaCanvas'
-//                version = '1.0'
-//            }
-//
-//        }
-//    }
-//}
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.abdullahmunirbhatti'
+                artifactId = 'AmbCanvas'
+                version = '1.0'
+            }
+            debug(MavenPublication) {
+                from components.debug
+                groupId = 'com.github.abdullahmunirbhatti'
+                artifactId = 'AmbCanvas'
+                version = '1.0'
+            }
+
+        }
+    }
+}
