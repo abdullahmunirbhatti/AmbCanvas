@@ -2,6 +2,7 @@ package com.amb.canvas
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.SeekBar
 import com.amb.ambcanvas.AmbCanvasView
 import com.amb.canvas.databinding.ActivityMainBinding
@@ -16,14 +17,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnDraw.setOnClickListener {
-            binding.canvas.mode = AmbCanvasView.PEN
-            binding.canvas.drawer = (AmbCanvasView.PEN)
+            binding.canvas.startDrawing()
 
         }
 
         binding.btnEraser.setOnClickListener {
-            binding.canvas.drawer = (AmbCanvasView.PEN)
-            binding.canvas.mode = AmbCanvasView.ERASER
+            binding.canvas.enableEraser()
 
         }
 
@@ -68,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         binding.seekbarOpacity.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val opacity = ((progress * 255) / 100).toInt();
+                Log.i("AmbLogs", "onProgressChanged:opacity $opacity ")
                 binding.canvas.setOpacity(opacity)
             }
 
@@ -81,11 +81,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.seekbarWidth.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-
                 val newProgress = progress.toFloat()
-
                 binding.canvas.setPaintStrokeWidth(newProgress)
-
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {

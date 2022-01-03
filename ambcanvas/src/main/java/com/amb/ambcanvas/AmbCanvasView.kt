@@ -48,6 +48,7 @@ class AmbCanvasView : View {
 
     private fun createPaint(): Paint {
         Log.i(TAG, "createPaint")
+
         val paint = Paint()
         paint.isAntiAlias = true
         paint.style = paintStyle
@@ -56,9 +57,11 @@ class AmbCanvasView : View {
         paint.strokeJoin = Paint.Join.ROUND
 
         if (mode == ERASER) {
-            setLayerType(LAYER_TYPE_SOFTWARE, null)
+//            setLayerType(LAYER_TYPE_SOFTWARE, null)
+            setLayerType(LAYER_TYPE_HARDWARE, null)
             paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
             paint.setARGB(0, 0, 0, 0)
+
         } else {
             paint.color = paintStrokeColor
             paint.setShadowLayer(blur, 0f, 0f, paintStrokeColor)
@@ -68,7 +71,7 @@ class AmbCanvasView : View {
         return paint
     }
 
-    private fun createPath(event: MotionEvent): Path {
+    private fun createPath(): Path {
         Log.i(TAG, "createPath: ")
         val path = Path()
         path.moveTo(motionTouchEventX, motionTouchEventY)
@@ -89,7 +92,7 @@ class AmbCanvasView : View {
 
     private fun touchDown(event: MotionEvent) {
         Log.i(TAG, "touchDown")
-        path = createPath(event)
+        path = createPath()
         if (historyPointer == pathLists.size) {
             pathLists.add(path)
             paintLists.add(createPaint())
@@ -214,7 +217,21 @@ class AmbCanvasView : View {
         historyPointer = 0
         pathLists.clear()
         paintLists.clear()
+
+        mode = PEN
+        drawer = PEN
+
         this.invalidate()
+    }
+
+    fun enableEraser(){
+        drawer = PEN
+        mode = ERASER
+    }
+
+    fun startDrawing(){
+        drawer = PEN
+        mode = PEN
     }
 
     fun getPaintStrokeWidth(): Float {
