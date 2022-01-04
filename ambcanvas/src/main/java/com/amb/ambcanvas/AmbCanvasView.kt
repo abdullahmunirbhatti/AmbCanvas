@@ -5,7 +5,6 @@ import android.graphics.*
 import android.graphics.Paint.Cap
 import android.view.MotionEvent
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import java.util.ArrayList
 import kotlin.math.abs
@@ -45,6 +44,7 @@ class AmbCanvasView : View {
         historyPointer++
     }
 
+
     private fun createPaint(): Paint {
         val paint = Paint()
         paint.isAntiAlias = true
@@ -60,9 +60,9 @@ class AmbCanvasView : View {
             paint.setARGB(0, 0, 0, 0)
         } else {
             paint.color = paintStrokeColor
-            paint.setShadowLayer(blur, 0f, 0f, paintStrokeColor)
+//            paint.setShadowLayer(blur, 0f, 0f, paintStrokeColor)
             paint.alpha = opacity
-            paint.pathEffect = drawPathEffect
+//            paint.pathEffect = drawPathEffect
         }
 
         return paint
@@ -79,6 +79,7 @@ class AmbCanvasView : View {
     private val currentPath: Path
         get() = pathLists[historyPointer - 1]
 
+//    var paint = Paint()
     private var path = Path()
     private var currentX = 0f
     private var currentY = 0f
