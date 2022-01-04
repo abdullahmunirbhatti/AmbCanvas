@@ -39,23 +39,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnRectangle.setOnClickListener {
-            binding.canvas.drawer = (AmbCanvasView.RECTANGLE)
+            binding.canvas.drawShape("RECTANGLE")
+
         }
 
         binding.btnCircle.setOnClickListener {
-            binding.canvas.drawer = (AmbCanvasView.CIRCLE)
+            binding.canvas.drawShape("CIRCLE")
         }
 
         binding.btnEllipse.setOnClickListener {
-            binding.canvas.drawer = (AmbCanvasView.ELLIPSE)
+            binding.canvas.drawShape("ELLIPSE")
         }
 
         binding.btnPen.setOnClickListener {
-            binding.canvas.drawer = (AmbCanvasView.PEN)
+            binding.canvas.startDrawing()
         }
 
         binding.btnLine.setOnClickListener {
-            binding.canvas.drawer = (AmbCanvasView.LINE)
+            binding.canvas.drawShape("LINE")
         }
 
         binding.colorSeekBar.setOnColorChangeListener(object : ColorSeekBar.OnColorChangeListener {
@@ -67,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         binding.seekbarOpacity.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val opacity = ((progress * 255) / 100).toInt();
-                Log.i("AmbLogs", "onProgressChanged:opacity $opacity ")
                 binding.canvas.setOpacity(opacity)
             }
 

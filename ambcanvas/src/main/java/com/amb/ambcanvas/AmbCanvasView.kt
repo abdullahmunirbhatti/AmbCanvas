@@ -40,15 +40,12 @@ class AmbCanvasView : View {
     }
 
     private fun setup() {
-        Log.i(TAG, "setup")
         pathLists.add(path)
         paintLists.add(createPaint())
         historyPointer++
     }
 
     private fun createPaint(): Paint {
-        Log.i(TAG, "createPaint")
-
         val paint = Paint()
         paint.isAntiAlias = true
         paint.style = paintStyle
@@ -61,19 +58,18 @@ class AmbCanvasView : View {
             setLayerType(LAYER_TYPE_HARDWARE, null)
             paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
             paint.setARGB(0, 0, 0, 0)
-
         } else {
             paint.color = paintStrokeColor
             paint.setShadowLayer(blur, 0f, 0f, paintStrokeColor)
             paint.alpha = opacity
             paint.pathEffect = drawPathEffect
         }
+
         return paint
     }
 
     private fun createPath(): Path {
-        Log.i(TAG, "createPath: ")
-        val path = Path()
+        /*val*/ path = Path()
         path.moveTo(motionTouchEventX, motionTouchEventY)
         currentX = motionTouchEventX
         currentY = motionTouchEventY
@@ -90,15 +86,13 @@ class AmbCanvasView : View {
     private var motionTouchEventX = 0f
     private var motionTouchEventY = 0f
 
-    private fun touchDown(event: MotionEvent) {
-        Log.i(TAG, "touchDown")
+    private fun touchDown() {
         path = createPath()
         if (historyPointer == pathLists.size) {
             pathLists.add(path)
             paintLists.add(createPaint())
             historyPointer++
         } else {
-            // On the way of Undo or Redo
             if (historyPointer >= 0) {
                 pathLists[historyPointer] = path
                 paintLists[historyPointer] = createPaint()
@@ -120,11 +114,9 @@ class AmbCanvasView : View {
 
         when (drawer) {
             PEN -> {
-
                 path.quadTo(currentX, currentY, (motionTouchEventX + currentX) / 2, (motionTouchEventY + currentY) / 2)
                 currentX = motionTouchEventX
                 currentY = motionTouchEventY
-
             }
             LINE -> {
                 path.reset()
@@ -141,7 +133,7 @@ class AmbCanvasView : View {
             }
             CIRCLE -> {
                 val distanceX = abs((currentX - x).toDouble())
-                val distanceY = abs((currentX - y).toDouble())
+                val distanceY = abs((currentY - y).toDouble())
                 val radius = sqrt(distanceX.pow(2.0) + distanceY.pow(2.0))
                 path.reset()
                 path.addCircle(currentX, currentY, radius.toFloat(), Path.Direction.CCW)
@@ -157,9 +149,7 @@ class AmbCanvasView : View {
     }
 
 
-    private fun touchUp(event: MotionEvent) {
-        Log.i(TAG, "touchUp: pathListSize: ${pathLists.size}")
-        Log.i(TAG, "touchUp: paintListSize: ${paintLists.size}")
+    private fun touchUp() {
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -177,24 +167,16 @@ class AmbCanvasView : View {
         motionTouchEventX = event.x
         motionTouchEventY = event.y
         when (event.action) {
-            MotionEvent.ACTION_DOWN -> touchDown(event)
+            MotionEvent.ACTION_DOWN -> touchDown()
             MotionEvent.ACTION_MOVE -> touchMove(event)
-            MotionEvent.ACTION_UP -> touchUp(event)
+            MotionEvent.ACTION_UP -> touchUp()
             else -> {}
         }
         return true
     }
 
-    fun canUndo(): Boolean {
-        return historyPointer > 0
-    }
-
-    fun canRedo(): Boolean {
-        return historyPointer < pathLists.size
-    }
-
     fun undo(): Boolean {
-        return if (canUndo()) {
+        return if (historyPointer > 0) {
             historyPointer--
             this.invalidate()
             true
@@ -204,7 +186,7 @@ class AmbCanvasView : View {
     }
 
     fun redo(): Boolean {
-        return if (canRedo()) {
+        return if (historyPointer < pathLists.size) {
             historyPointer++
             this.invalidate()
             true
@@ -217,21 +199,36 @@ class AmbCanvasView : View {
         historyPointer = 0
         pathLists.clear()
         paintLists.clear()
-
         mode = PEN
         drawer = PEN
-
         this.invalidate()
     }
 
-    fun enableEraser(){
+    fun enableEraser() {
         drawer = PEN
         mode = ERASER
     }
 
-    fun startDrawing(){
+    fun startDrawing() {
         drawer = PEN
         mode = PEN
+    }
+
+    fun drawShape(shape: String) {
+        when (shape) {
+            "RECTANGLE" -> {
+                drawer = RECTANGLE
+            }
+            "ELLIPSE" -> {
+                drawer = ELLIPSE
+            }
+            "CIRCLE" -> {
+                drawer = CIRCLE
+            }
+            "LINE" -> {
+                drawer = LINE
+            }
+        }
     }
 
     fun getPaintStrokeWidth(): Float {
